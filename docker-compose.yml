@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Next.js アプリケーション
+  nextjs:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: "mysql://root:password@mysql:3306/mydb"
+    volumes:
+      - .:/app
+
+  # MySQL サービス
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

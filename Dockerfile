@@ -7,6 +7,9 @@ WORKDIR /app
 # パッケージをインストールする前にpackage.jsonとpackage-lock.jsonをコピー
 COPY package*.json ./
 
+# Prima Copy
+COPY prisma ./
+
 # 必要なパッケージをインストール
 RUN npm install
 
@@ -17,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Next.jsのデフォルトのポートを開放
-EXPOSE 3000
+# EXPOSE 3000
 
 # Next.jsのアプリを実行
 CMD ["npm","run","start"]
